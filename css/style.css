@@ -1,0 +1,25 @@
+.flex-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.flex-item {
+    padding: 3%;
+}
+
+#innerFormDiv {
+    width: 40vw;
+}
+
+.errMessage {
+    background-color: lightcoral;
+    padding: 0.2vw;
+    margin-top: 0.2vw;
+    margin-bottom: 0.8vw;
+}
+
+formButton {
+    width: 15%;
+    margin: 2%;
+}
