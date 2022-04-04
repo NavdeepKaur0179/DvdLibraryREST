@@ -93,6 +93,7 @@ function openEditDvd(dvdId)
     localStorage.setItem("dvdId", dvdId);
     w.location.href="editDvd.html";
     w.dvdId=dvdId;
+    alert("I am back in home");
 
 }
 
@@ -192,48 +193,7 @@ function test(searchUrl)
     );
 }
 
-function editDvd(dvdId)
-{
-    let editDvdUrl='http://dvd-library.us-east-1.elasticbeanstalk.com/dvd/'+dvdId;
-    alert("in edit method");
-    $.when(editAjax(editDvdUrl)).done(function ()
-    {
-        getDvds('http://dvd-library.us-east-1.elasticbeanstalk.com/dvds');
 
-    });
-   
-}
-
-function editAjax(editDvdUrl)
-{
-    return  $.ajax(
-        {
-            type:'PUT',
-            url:editDvdUrl,
-            success:function(dvds)
-            {
-                alert("Edited successfully");
-                // var tableBody=$("#tableBody");
-                // $.each(dvds,function(index,dvd)
-                // {
-                //     var row;
-                //     row +='<tr scope="row">';
-                //     row += '<td><a href="" >'+dvd.title+'</a></td>';
-                //     row +='<td>'+dvd.releaseYear+'</td>';
-                //     row +='<td>'+dvd.director+'</td>';
-                //     row +='<td>'+dvd.rating+'</td>';
-                //     row +='<td><a href="">Edit</a>'+" | "+'<a href="">Delete</a></td>';
-                //     row +='</tr>';
-                //     tableBody.append(row);
-                // })   
-            },
-            error:function()
-            {
-                alert("error");
-            }
-        }
-    );
-}
 function deleteDvd(dvdId)
 {
     //alert("in delete method");
