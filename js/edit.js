@@ -5,26 +5,26 @@ console.log(dvdId);
 getDvd(dvdId);
 $('#cancelButton').click(function(e)
 {
-    window.top.close();
-}) 
+    e.preventDefault();
+    location.href="home.html";
+});
 $('#saveButton').click(function(e)
 {   
     let currentDvd={
-    "id": dvdId,
-    "title": $("#dvdTitle").val() ,
-    "releaseYear": $("#releaseYear").val(),
-    "director":$("#director").val(),
-    "rating": $("#director").val(),
-    "notes": $("#notes").val()
+    id: dvdId,
+    title: $("#dvdTitle").val() ,
+    releaseYear: $("#releaseYear").val(),
+    director:$("#director").val(),
+    rating: $("#director").val(),
+    notes: $("#notes").val()
     };
-
     e.preventDefault();
     editDvd(currentDvd);
-    window.top.close();
-}) 
+    alert("Edited successfully");
+    location.href="home.html";
+    //window.top.close();
 }); 
-
-
+}); 
 function getDvd(dvdId)
 {
   let getUrl="http://dvd-library.us-east-1.elasticbeanstalk.com/dvd/"+dvdId;
@@ -45,24 +45,19 @@ function getDvd(dvdId)
         {
             alert("error in get dvd");
         }
-
     });
    
 }
-
 function editDvd(currentDvd)
 {
     let editDvdUrl='http://dvd-library.us-east-1.elasticbeanstalk.com/dvd/'+currentDvd.id;
     alert("in edit method");
     $.when(editAjax(editDvdUrl,currentDvd)).done(function ()
     {
-        alert("Edited successfully");
-        //getDvds('http://dvd-library.us-east-1.elasticbeanstalk.com/dvds');
-
+        alert("Edited successfully in edit Dvd");
+        //getDvds('http://dvd-library.us-east-1.elasticbeanstalk.com/dvds');​
     });
-   
 }
-
 function editAjax(editDvdUrl,currentDvd)
 {
     return  $.ajax(
@@ -70,14 +65,13 @@ function editAjax(editDvdUrl,currentDvd)
             type:'PUT',
             url:editDvdUrl,
             contentType: "application/json; charset=utf-8",
-            dataType: "json",
             data: JSON.stringify(currentDvd),
             success:function()
             {
                 alert("Edited successfully");
                    
             },
-            error:function()
+            error:function(xhr, response, error)
             {
                 alert("error");
             }

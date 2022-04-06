@@ -1,12 +1,13 @@
 $(document).ready(function(){
+    getDvds('http://dvd-library.us-east-1.elasticbeanstalk.com/dvds');
     $('#deleteModal').hide();
     $("#errorMessage").append('<p>Both Search Category and Search Term are required</p>').addClass("errMessage").hide();
-    $("#getAllDvdsButton").click(function(e)
-    {
-        e.preventDefault();
-        getDvds('http://dvd-library.us-east-1.elasticbeanstalk.com/dvds');
+    // $("#getAllDvdsButton").click(function(e)
+    // {
+    //     e.preventDefault();
+    //     getDvds('http://dvd-library.us-east-1.elasticbeanstalk.com/dvds');
 
-    });
+    // });
 
     $("#searchDvdButton").click(function(e)
     {
@@ -25,7 +26,14 @@ $(document).ready(function(){
         //alert(dvdId);
         deleteDvd(dvdId);
        
-    })
+    });
+
+    $('#createDvd').click(function(e)
+    {
+    // window.open().location.href="createDvd.html";   
+        location.href="createDvd.html";
+    });
+
 });
 function getDvds(currentUrl)
 {
@@ -44,13 +52,7 @@ function getDvds(currentUrl)
                     let row;
                     let dvdId=dvd.id;
                     let editDvd="edit_"+dvdId;
-                    let deleteDvd="delete_"+dvdId;
-                    var myDog = {
-                        name: "gozi",
-                        legs: 4,
-                        tails: 1,
-                        friends: ["Ted", "Fred"]
-                      };
+                    let deleteDvd="delete_"+dvdId;                   
                     row +='<tr scope="row">';
                     row += '<td><a href="" >'+dvd.title+'</a></td>';
                     row +='<td>'+dvd.releaseYear+'</td>';
@@ -88,13 +90,14 @@ function openConfirmation(dvdId)
 function openEditDvd(dvdId)
 {
    // alert(dvdId);
-    let B = {dvd:dvdId};
-    let w=window.open();
+    //let B = {dvd:dvdId};
+    //let w=window.open();
     localStorage.setItem("dvdId", dvdId);
-    w.location.href="editDvd.html";
-    w.dvdId=dvdId;
-    alert("I am back in home");
-
+    location.href="editDvd.html";
+    //w.dvdId=dvdId;
+    //alert("I am back in home");
+    //window.top.close();
+    getDvds('http://dvd-library.us-east-1.elasticbeanstalk.com/dvds');
 }
 
 function validateData()
